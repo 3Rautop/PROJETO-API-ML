@@ -95,7 +95,7 @@ app.get("/", (req, res) => {
   <body>
     <div class="container">
       <div class="logo-img">
-        <img src="logotipo-3-img.jpg" alt="Logo 3R Moto Peças">
+        <img src="logotipo-3r.png" alt="Logo 3R Moto Peças">
       </div>
       <h2>Bem-vindo à sua plataforma inteligente</h2>
       <button onclick="alert('Em breve novas funcionalidades!')">Explorar</button>
