@@ -1,25 +1,112 @@
-const express = require('express');
-const app = express();
+import express from "express";
 
-// O Render define a porta na variável de ambiente PORT
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Configura o middleware para receber JSON no corpo da requisição (necessário para webhooks)
-app.use(express.json());
+app.get("/", (req, res) => {
+  res.send(`
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma GSR</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+      }
 
-// ----------------------------------------------------------------------------------
-// ROTA 1: Rota Raiz (Página de Teste Visual com IMAGEM 3D)
-// A URL principal agora mostra uma página personalizada com o logo 3D.
-app.get('/', (req, res) => {
-  // A imagem do Modelo 3 codificada em Base64
-  // NOTA: Esta string é longa e complexa. Se o erro "yTz/yTz" persistir,
-  // isso indica um problema de renderização no aplicativo/navegador que está abrindo esta página.
-  const base64Image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAACcCAMAAAD+p0x3AAAAdVBMVEX///8AAADY2Nj8/PzU1NTIyMiioqL4+PjDw8PMzMy7u7vu7u7k5OTt7e3m5ubFxcX29vYWFhbz8/P6+vrg4OCnp6eVlZWysrKgoKCcnJyPj4+enp6dnZ3R0dHExMTj4+Py8vLDw8O+vr4qKipgYGBISEj2c0lRAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAKk0lEQVR4nO3d61baOhaA4VigvICmCCvA97/R91iSAu9nB9zN3k+dSZp1m8y920jM2/h+p+4j1yTJWpZlWYn/G36m6/xTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yTz/yY/ytz/ytz/s=d3RzIHN0Y29zIGEgY3VydCBtbyBzdG9wIHRoZSBsaWdht+s/dGlw=
+      .container {
+        text-align: center;
+        animation: fadeIn 2s ease;
+      }
 
-### Instruções Críticas:
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
 
-1.  **Copie e Cole TODO o Conteúdo:** Certifique-se de substituir **todo** o conteúdo do seu `index.js` no GitHub por este novo bloco de código.
-2.  **Aguarde a Implantação:** O Render fará a implantação.
-3.  **Teste em um Navegador Padrão:** **Use o Google Chrome ou Firefox** no seu celular ou computador (não use o "2.5 Flash") para acessar o link: `https://projeto-api-ml.onrender.com`.
+      .logo {
+        font-size: 72px;
+        font-weight: 900;
+        color: #333;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        animation: rotate3D 6s linear infinite;
+        transform-style: preserve-3d;
+      }
 
-Se a página carregar corretamente com o logo 3D e o status "ATIVO", o erro **`yTz/yTz` foi um problema do aplicativo que você estava usando para testar**, e não do seu código. Seu servidor estará pronto para receber notificações do Mercado Livre.
+      .logo::before {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #bbb;
+        transform: translateZ(-15px);
+      }
+
+      @keyframes rotate3D {
+        0% { transform: rotateY(0deg); text-shadow: 3px 3px 6px rgba(0,0,0,0.2); }
+        50% { transform: rotateY(180deg); text-shadow: -3px 3px 6px rgba(0,0,0,0.3); }
+        100% { transform: rotateY(360deg); text-shadow: 3px 3px 6px rgba(0,0,0,0.2); }
+      }
+
+      h2 {
+        color: #444;
+        margin-top: 20px;
+        font-weight: 500;
+      }
+
+      button {
+        margin-top: 40px;
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      button:hover {
+        background: #0056b3;
+        transform: scale(1.07);
+      }
+
+      footer {
+        position: absolute;
+        bottom: 10px;
+        font-size: 14px;
+        color: #777;
+      }
+
+      @media (max-width: 600px) {
+        .logo { font-size: 54px; }
+        h2 { font-size: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo" data-text="GSR">GSR</div>
+      <h2>Bem-vindo à sua plataforma inteligente</h2>
+      <button onclick="alert('Em breve novas funcionalidades!')">Explorar</button>
+    </div>
+    <footer>© 2025 Gleison Santos Ribeiro - Todos os direitos reservados</footer>
+  </body>
+  </html>
+  `);
+});
+
+// Inicializa o servidor (Render reconhece automaticamente a porta)
+app.listen(PORT, () => console.log(\`🚀 Servidor rodando na porta \${PORT}\`));
