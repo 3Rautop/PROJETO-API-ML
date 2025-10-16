@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Servir arquivos estáticos da pasta "public"
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   res.send(`
   <!DOCTYPE html>
@@ -9,7 +12,7 @@ app.get("/", (req, res) => {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma GSR</title>
+    <title>3R Moto Peças</title>
     <style>
       body {
         margin: 0;
@@ -32,30 +35,24 @@ app.get("/", (req, res) => {
         to { opacity: 1; transform: translateY(0); }
       }
 
-      .logo {
-        font-size: 72px;
-        font-weight: 900;
-        color: #333;
-        text-transform: uppercase;
-        position: relative;
-        display: inline-block;
-        animation: rotate3D 6s linear infinite;
+      .logo-img {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        animation: rotateLogo 6s linear infinite;
         transform-style: preserve-3d;
       }
 
-      .logo::before {
-        content: attr(data-text);
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: #bbb;
-        transform: translateZ(-15px);
+      .logo-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
 
-      @keyframes rotate3D {
-        0% { transform: rotateY(0deg); text-shadow: 3px 3px 6px rgba(0,0,0,0.2); }
-        50% { transform: rotateY(180deg); text-shadow: -3px 3px 6px rgba(0,0,0,0.3); }
-        100% { transform: rotateY(360deg); text-shadow: 3px 3px 6px rgba(0,0,0,0.2); }
+      @keyframes rotateLogo {
+        0% { transform: rotateY(0deg); }
+        50% { transform: rotateY(180deg); }
+        100% { transform: rotateY(360deg); }
       }
 
       h2 {
@@ -90,14 +87,16 @@ app.get("/", (req, res) => {
       }
 
       @media (max-width: 600px) {
-        .logo { font-size: 54px; }
+        .logo-img { width: 200px; height: 200px; }
         h2 { font-size: 18px; }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="logo" data-text="GSR">GSR</div>
+      <div class="logo-img">
+        <img src="logo-3r.png" alt="Logo 3R Moto Peças">
+      </div>
       <h2>Bem-vindo à sua plataforma inteligente</h2>
       <button onclick="alert('Em breve novas funcionalidades!')">Explorar</button>
     </div>
