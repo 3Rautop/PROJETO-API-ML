@@ -8,10 +8,73 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // ----------------------------------------------------------------------------------
-// ROTA 1: Rota Raiz (apenas para testar se o app está no ar)
-// Quando você acessar a URL principal do Render no navegador, esta mensagem aparecerá.
+// ROTA 1: Rota Raiz (Página de Teste Visual)
+// A URL principal agora mostra uma página personalizada e formatada.
 app.get('/', (req, res) => {
-  res.send('Servidor de Webhook do Mercado Livre está rodando!');
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Serviço de Webhook - 3R MOTO PEÇAS</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f4f4; /* Fundo suave */
+                text-align: center;
+            }
+            .container {
+                padding: 40px;
+                border-radius: 12px;
+                background-color: white;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra mais destacada */
+            }
+            h1 {
+                font-size: 3.5em; /* Letras ainda maiores */
+                color: #000000; /* Preto forte */
+                margin-bottom: 5px;
+                text-transform: uppercase; /* Coloca em maiúsculas */
+                letter-spacing: 3px; /* Espaçamento entre letras */
+            }
+            .status {
+                font-size: 1.4em;
+                color: #28a745; /* Verde de sucesso */
+                font-weight: 600;
+                margin-top: 15px;
+            }
+            .info {
+                color: #6c757d;
+                margin-top: 25px;
+                font-size: 1.1em;
+            }
+            .callback-url {
+                font-weight: bold;
+                color: #dc3545; /* Vermelho para destaque da URL */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>3R MOTO PEÇAS</h1>
+            <p class="status">✅ SERVIDOR DE WEBHOOK ESTÁ ATIVO!</p>
+            <p class="info">Esta página confirma que o serviço está rodando no Render.</p>
+            <p class="info">
+                O link de callback para a API do ML é: 
+                <br>
+                <span class="callback-url">/callback</span>
+            </p>
+        </div>
+    </body>
+    </html>
+  `;
+  res.send(htmlContent);
 });
 
 // ----------------------------------------------------------------------------------
