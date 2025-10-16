@@ -1,7 +1,6 @@
 {
-  "name": "ml-webhook-node",
+  "name": "projeto-api-ml",
   "version": "1.0.0",
-  "description": "Webhook para notificações do Mercado Livre",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
